@@ -1,8 +1,23 @@
+const mongoose = require('mongoose')
+const mongodbURL = process.env.MONGODBURL;
+
 module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
         console.log('Ready!');
+
+        if (!mongodbURL) return;
+
+        mongoose.set("strictQuery", false);
+        await mongoose.connect(mongodbURL || ``, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+
+        if (mongoose.connect) {
+            console.log('Database is up and running!')
+        }
 
         async function pickPresence () {
             const option = Math.floor(Math.random() * statusArray.length);
