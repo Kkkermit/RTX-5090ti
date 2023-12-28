@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Kkkermit/RTX-5090ti#readme",
   "dependencies": {
     "ascii-table": "^0.0.9",
+    "axios": "^1.6.3",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1"
   }

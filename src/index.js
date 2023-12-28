@@ -3,6 +3,8 @@ const {
     } = require(`discord.js`);
 
 const fs = require('fs');
+const config = require('./config.json')
+const ServerName = config.serverName
 require('./functions/processHandlers')()
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds, 
@@ -45,8 +47,11 @@ client.on("ready", async (client) => {
     setInterval(() => {
 
         let activities = [
-            { type: 'Playing', name: 'help me'},
-            { type: 'Playing', name: '...'}
+            { type: 'Playing', name: 'in the darkness.'},
+            { type: 'Playing', name: `with my ${client.commands.size} commands.`},
+            { type: 'Watching', name: `over ${ServerName} server!`},
+            { type: 'Watching', name: `${client.guilds.cache.reduce((a,b) => a+b.memberCount, 0)} members!`},
+            { type: 'Playing', name: `PC building simulator`}
         ];
 
         const status = activities[Math.floor(Math.random() * activities.length)];
@@ -76,3 +81,11 @@ const commandFolders = fs.readdirSync("./src/commands");
     client.login(process.env.token)
 })();
 
+// Status //
+
+client.on("ready", () => {
+    console.log('Bot is online.');
+
+    client.user.setStatus("dnd");
+
+})
