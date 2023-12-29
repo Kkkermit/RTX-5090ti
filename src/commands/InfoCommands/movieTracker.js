@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios')
 const config = require('../../config.json')
 const Owner = config.owner
+const APIKEY = process.env.APIKEY;
 
 module.exports = {
     data: new SlashCommandBuilder() 
@@ -11,7 +12,7 @@ module.exports = {
 
         async execute(interaction, client) {
 
-            const apiKey = "07dc5aaafa310b753718b1fb94409164"
+            const apiKey = APIKEY
 
             const { options, member, guild } = interaction;
             const name = options.getString("name")
